@@ -3,204 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rasuka | The Voice of My Heart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Devanagari:wght@300;600&family=Prata&display=swap" rel="stylesheet">
+    <title>For My Kanchee - Rasuka</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --royal-crimson: #6b0f1a;
-            --gold: #d4af37;
-            --deep-space: #0a0a0a;
+            --primary-pink: #ff4d6d;
+            --soft-gold: #f9dcc4;
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
-            background-color: var(--deep-space);
-            color: white;
-            font-family: 'Prata', serif;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #2b060a 0%, #0a0a0a 100%);
-        }
-
-        /* Continuous Background Heart Stream */
-        #bg-stream {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Glassmorphism Main Stage */
-        .stage {
-            position: relative;
-            z-index: 10;
-            padding: 80px 40px;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffb3c1 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            color: #4a4a4a;
             text-align: center;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            max-width: 550px;
-            width: 90%;
-            border-radius: 4px;
         }
 
-        .gold-line {
-            width: 60px;
-            height: 1px;
-            background: var(--gold);
-            margin: 25px auto;
+        /* Floating Hearts Background */
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: var(--primary-pink);
+            z-index: -1;
+            user-select: none;
+            animation: float 5s linear infinite;
+            opacity: 0;
         }
 
-        .sub-title {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 5px;
-            font-size: 0.7rem;
-            color: var(--gold);
-            text-transform: uppercase;
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 20px;
         }
 
         h1 {
-            font-size: clamp(3rem, 10vw, 5rem);
-            font-weight: 400;
-            letter-spacing: -2px;
-            background: linear-gradient(to bottom, #ffffff, #d4af37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
         }
 
-        .nepali-name {
-            font-family: 'Noto Sans Devanagari', sans-serif;
-            font-size: 2rem;
-            color: var(--gold);
-            margin-top: 10px;
-            font-weight: 300;
-        }
-
-        .quote {
-            font-size: 1rem;
-            color: #aaa;
-            line-height: 1.8;
-            margin-top: 20px;
-        }
-
-        .play-trigger {
-            margin-top: 40px;
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 12px 35px;
-            font-family: 'Cinzel', serif;
+        .subtitle {
+            font-size: 1.2rem;
             letter-spacing: 2px;
-            transition: 0.4s;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
 
-        .play-trigger:hover {
-            background: var(--gold);
-            color: black;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        .hero-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            object-fit: cover;
         }
 
-        /* Click Particles & Background Elements */
-        .particle {
-            position: absolute;
-            pointer-events: none;
-            z-index: 99;
-            animation: burst 1.5s ease-out forwards;
+        .love-letter {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1);
+            line-height: 1.8;
+            margin-bottom: 40px;
         }
 
-        @keyframes burst {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        .music-player {
+            background: white;
+            padding: 20px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .drifting-heart {
-            position: absolute;
-            bottom: -50px;
-            opacity: 0;
-            animation: driftUp 10s linear infinite;
+        .btn-play {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        @keyframes driftUp {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.4; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
     </style>
 </head>
-<body onclick="spawnBurst(event)">
+<body>
 
-    <div id="bg-stream"></div>
+    <div class="container">
+        <img src="https://via.placeholder.com/250" alt="Rasuka" class="hero-image">
+        
+        <h1>Rasuka, My Kanchee</h1>
+        <p class="subtitle">Nepal's Most Beautiful Voice</p>
 
-    <div class="stage">
-        <span class="sub-title">A Living Tribute to</span>
-        <h1>Rasuka</h1>
-        <div class="nepali-name">कान्छी</div>
-        <div class="gold-line"></div>
-        <p class="quote">
-            "Your voice is the bridge between the earth and the heavens. <br>
-            A soul that sings, a heart that loves."
-        </p>
-        <button class="play-trigger" onclick="toggleMusic()">Experience Music</button>
+        <div class="love-letter">
+            <p>
+                To my dearest <strong>Kanchee</strong>,<br><br>
+                They say music is the language of the soul, but when you sing, the whole world stops to listen. 
+                Watching you grow as a singer in Nepal makes me the proudest person alive. 
+                Your voice has a magic that carries the sweetness of the hills and the purity of the mountains.
+                <br><br>
+                Never stop chasing your dreams. This little corner of the internet is a tribute to your 
+                talent, your kindness, and the love you bring into my life every day.
+            </p>
+            <h3 style="font-family: 'Dancing Script'; font-size: 2rem;">"Timro Swor ma Jadu Cha"</h3>
+        </div>
+
+        <div class="music-player">
+            <span>🎵 Our Melody</span>
+            <audio id="bgMusic" loop>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+            <button class="btn-play" onclick="toggleMusic()">Play Music</button>
+        </div>
+
+        <footer>
+            Created with ❤️ for Rasuka
+        </footer>
     </div>
 
-    <audio id="nepaliInstrumental" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" type="audio/mpeg">
-    </audio>
-
     <script>
-        const audio = document.getElementById('nepaliInstrumental');
-        const container = document.getElementById('bg-stream');
-        const clickIcons = ['❤️', '🎶', '✨', '🎵', '🌸'];
-        const driftIcons = ['❤️', '💖', '✨'];
+        // Heart Animation Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
 
-        // 1. Background Heart Stream (Automatic)
-        function createDrift() {
-            const el = document.createElement('div');
-            el.className = 'drifting-heart';
-            el.innerText = driftIcons[Math.floor(Math.random() * driftIcons.length)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = Math.random() * 15 + 10 + 'px';
-            el.style.animationDuration = Math.random() * 5 + 5 + 's';
-            container.appendChild(el);
-            setTimeout(() => el.remove(), 10000);
-        }
-        setInterval(createDrift, 600);
-
-        // 2. Multi-Click Burst Effect
-        function spawnBurst(e) {
-            for (let i = 0; i < 8; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.innerText = clickIcons[Math.floor(Math.random() * clickIcons.length)];
-                p.style.left = e.clientX + 'px';
-                p.style.top = e.clientY + 'px';
-                
-                // Random explosion direction
-                const tx = (Math.random() - 0.5) * 300 + 'px';
-                const ty = (Math.random() - 0.5) * 300 + 'px';
-                p.style.setProperty('--tx', tx);
-                p.style.setProperty('--ty', ty);
-                
-                document.body.appendChild(p);
-                setTimeout(() => p.remove(), 1500);
-            }
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
         }
 
-        // 3. Audio Controller
+        setInterval(createHeart, 300);
+
+        // Music Toggle
+        const music = document.getElementById('bgMusic');
         function toggleMusic() {
-            const btn = document.querySelector('.play-trigger');
-            if (audio.paused) {
-                audio.play();
-                btn.innerText = "Listening to Tradition";
+            if (music.paused) {
+                music.play();
+                document.querySelector('.btn-play').innerText = 'Pause';
             } else {
-                audio.pause();
-                btn.innerText = "Experience Music";
+                music.pause();
+                document.querySelector('.btn-play').innerText = 'Play Music';
             }
         }
     </script>
