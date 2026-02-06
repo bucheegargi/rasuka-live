@@ -1,188 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Kanchiiii | Rasuka</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root {
-            --primary-pink: #ffafcc;
-            --deep-rose: #ff5c8d;
-            --soft-cream: #fffaf0;
-            --text-color: #4a4a4a;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--soft-cream);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        /* Floating Hearts Animation */
-        .hearts {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Header Section */
-        header {
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; font-family: 'Arial', sans-serif; }
+        
+        .stage {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: radial-gradient(circle, #ff0055 0%, #000 100%);
+            transition: 0.5s;
             text-align: center;
-            background: linear-gradient(rgba(255,175,204,0.3), rgba(255,250,240,1));
+            color: white;
         }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 5rem;
-            color: var(--deep-rose);
-            margin-bottom: 10px;
-            animation: heartBeat 1.5s infinite;
+        .mic { font-size: 80px; filter: drop-shadow(0 0 20px #fff); cursor: pointer; animation: bounce 2s infinite; }
+        
+        h1 { font-size: 3rem; margin: 10px 0; text-transform: uppercase; letter-spacing: 5px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.8; color: #ffafcc; }
+
+        .lyrics-box {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #ffafcc;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            max-width: 80%;
         }
 
-        .nickname {
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #888;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        /* Passion Section */
-        .singing-section {
-            padding: 80px 20px;
-            text-align: center;
-            background: white;
-        }
-
-        .mic-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .quote {
-            font-style: italic;
-            max-width: 600px;
-            margin: 0 auto;
-            font-size: 1.2rem;
-            line-height: 1.6;
-        }
-
-        /* Decorative Cards */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 50px;
-            flex-wrap: wrap;
-        }
-
-        .card {
-            background: var(--soft-cream);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            width: 250px;
-            transition: transform 0.3s ease;
-            border: 1px solid var(--primary-pink);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--deep-rose);
-        }
-
-        @keyframes heartBeat {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Mobile optimization */
-        @media (max-width: 600px) {
-            h1 { font-size: 3.5rem; }
-        }
+        .confetti { position: absolute; width: 10px; height: 10px; background: #fff; opacity: 0; }
     </style>
 </head>
-<body>
+<body onclick="celebrate()">
 
-    <div class="hearts" id="heartContainer"></div>
-
-    <header>
-        <p class="nickname">To My Dearest</p>
-        <h1>Rasuka</h1>
-        <p style="font-size: 1.2rem;">My one and only <strong>Kanchiiii</strong> ❤️</p>
-    </header>
-
-    <section class="singing-section">
-        <div class="mic-icon">🎤</div>
-        <h2>The Voice of My Heart</h2>
-        <p class="quote">
-            "When Rasuka sings, even the mountains of Nepal listen. 
-            Her voice isn't just music; it's a melody that makes my world complete."
-        </p>
-    </section>
-
-    <div class="features">
-        <div class="card">
-            <h3>🎶 Passion</h3>
-            <p>Bringing Nepali songs to life with every note she hits.</p>
+    <div class="stage" id="stage">
+        <div class="mic">🎙️</div>
+        <p class="subtitle">NOW PERFORMING LIVE</p>
+        <h1>RASUKA</h1>
+        <div class="lyrics-box">
+            <p id="quote">"Kanchiiii, your voice is my favorite Nepali song."</p>
         </div>
-        <div class="card">
-            <h3>✨ Sparkle</h3>
-            <p>The way her eyes light up when she reaches the high notes.</p>
-        </div>
-        <div class="card">
-            <h3>💖 Kanchiiii</h3>
-            <p>More than a name—it's a feeling of home and love.</p>
-        </div>
+        <p style="margin-top: 50px; font-size: 0.8rem;">tap the screen to cheer</p>
     </div>
 
-    <footer>
-        Made with ❤️ for Rasuka
-    </footer>
-
     <script>
-        // Simple script to create floating hearts
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.innerHTML = '🌸';
-            heart.style.position = 'absolute';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.top = '100vh';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            heart.style.opacity = Math.random();
-            heart.style.transition = 'transform 5s linear, opacity 5s';
+        const quotes = [
+            "Resham Filili? No, Rasuka Filili! 🎶",
+            "The mountains ring when you sing! 🏔️",
+            "My favorite singer: Kanchiiii ❤️",
+            "Next stop: Nepal Idol? No, My Idol! 🌟",
+            "Hit that high note, baby! 🎼"
+        ];
+
+        function celebrate() {
+            const stage = document.getElementById('stage');
+            const quote = document.getElementById('quote');
             
-            document.getElementById('heartContainer').appendChild(heart);
-
-            setTimeout(() => {
-                heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
-                heart.style.opacity = '0';
-            }, 100);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+            // Randomly change background color
+            const colors = ['#ff0055', '#6a0dad', '#00b4d8', '#ff8500', '#2d6a4f'];
+            stage.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random()*colors.length)]} 0%, #000 100%)`;
+            
+            // Change the quote
+            quote.innerText = quotes[Math.floor(Math.random()*quotes.length)];
+            
+            // Haptic/Visual feedback
+            stage.style.transform = "scale(0.98)";
+            setTimeout(() => stage.style.transform = "scale(1)", 100);
         }
-
-        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
