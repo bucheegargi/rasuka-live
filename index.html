@@ -3,152 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanchiiii | A Musical Tribute</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <title>Tribute to Kanchiiii</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
             --love-red: #ff4d6d;
-            --soft-white: rgba(255, 255, 255, 0.9);
+            --gold: #ffd700;
+            --soft-pink: #ffafcc;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100%;
+            background: #0f0c29; /* Deep midnight blue */
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
             font-family: 'Montserrat', sans-serif;
-            background: #0a0a0a; /* Deep elegant dark background */
-            color: white;
             overflow: hidden;
+            color: white;
         }
 
-        /* Animated Gradient Background */
-        .bg-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(45deg, #1a1a1a, #4a0e0e, #1a1a1a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            z-index: -2;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* The "Glass" Card */
-        .container {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-        }
-
-        .tribute-card {
+        /* The Main Content */
+        .glass-stage {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            max-width: 450px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 50px;
-            border-radius: 30px;
+            padding: 40px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            max-width: 500px;
-            width: 80%;
+            z-index: 100;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4.5rem;
-            color: var(--love-red);
+            font-size: 4rem;
             margin: 0;
-            text-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+            color: var(--love-red);
+            text-shadow: 0 0 15px rgba(255, 77, 109, 0.8);
         }
 
-        .nepali-text {
-            font-size: 1.5rem;
+        .nepali-title {
+            font-size: 1.2rem;
             color: var(--gold);
-            margin: 15px 0;
-            letter-spacing: 2px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
         }
 
-        .play-btn {
-            background: var(--love-red);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 20px;
-            box-shadow: 0 0 15px var(--love-red);
-        }
-
-        .play-btn:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--love-red); }
-
-        /* Floating particles */
-        .particle {
+        /* Floating Love Elements */
+        .heart-pop {
             position: absolute;
+            bottom: -50px;
             pointer-events: none;
-            animation: floatUp 5s linear forwards;
+            user-select: none;
+            animation: floatUp var(--duration) ease-in infinite;
+            opacity: 0;
         }
 
         @keyframes floatUp {
-            to { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(1.5) rotate(360deg); opacity: 0; }
         }
+
+        .music-bar {
+            width: 100px;
+            height: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin: 20px auto;
+        }
+
+        .bar {
+            width: 5px;
+            background: var(--love-red);
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        @keyframes bounce {
+            from { height: 5px; }
+            to { height: 30px; }
+        }
+
+        .play-hint {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            color: var(--soft-pink);
+        }
+
     </style>
 </head>
-<body onmousemove="createParticle(event)">
+<body onclick="playMusic()">
 
-    <div class="bg-overlay"></div>
-
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <div class="container">
-        <div class="tribute-card">
-            <p style="text-transform: uppercase; letter-spacing: 5px; opacity: 0.7;">My Muse, My Melody</p>
-            <h1>Rasuka</h1>
-            <div class="nepali-text">म तिमीलाई माया गर्छु, कान्छी ❤️</div>
-            <p style="line-height: 1.8; opacity: 0.9;">
-                The way you sing Nepali songs doesn't just fill the room—it fills my soul. 
-                This is a small stage for the biggest star in my universe.
-            </p>
-            <button class="play-btn" onclick="toggleMusic()">🎵 Tap for Music</button>
+    <div class="glass-stage">
+        <p class="nepali-title">Mero Sannani</p>
+        <h1>Rasuka</h1>
+        <p style="margin: 20px 0; font-style: italic; opacity: 0.8;">
+            "Whenever you sing, my world stops to listen. Keep making magic with your voice, Kanchiiii."
+        </p>
+        
+        <div class="music-bar">
+            <div class="bar" style="animation-delay: 0.1s"></div>
+            <div class="bar" style="animation-delay: 0.3s"></div>
+            <div class="bar" style="animation-delay: 0.2s"></div>
+            <div class="bar" style="animation-delay: 0.4s"></div>
+            <div class="bar" style="animation-delay: 0.5s"></div>
         </div>
+
+        <p class="play-hint">Tap anywhere to play our song</p>
     </div>
 
+    <audio id="loveSong" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        function toggleMusic() {
-            const music = document.getElementById('bgMusic');
-            const btn = document.querySelector('.play-btn');
-            if (music.paused) {
-                music.play();
-                btn.innerHTML = "🎶 Music Playing...";
-            } else {
-                music.pause();
-                btn.innerHTML = "🎵 Tap for Music";
-            }
+        function playMusic() {
+            document.getElementById('loveSong').play();
+            document.querySelector('.play-hint').innerHTML = "Listening with you... ❤️";
         }
 
-        function createParticle(e) {
-            const colors = ['#ff4d6d', '#ffafcc', '#d4af37'];
-            const p = document.createElement('div');
-            p.className = 'particle';
-            p.innerHTML = '❤️';
-            p.style.left = e.pageX + 'px';
-            p.style.top = e.pageY + 'px';
-            p.style.color = colors[Math.floor(Math.random() * colors.length)];
-            p.style.fontSize = Math.random() * 20 + 10 + 'px';
+        function createHeart() {
+            const icons = ['❤️', '💖', '🎶', '✨', '🌸', '🎤'];
+            const heart = document.createElement('div');
+            heart.className = 'heart-pop';
             
-            document.body.appendChild(p);
+            // Randomize icon
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             
-            setTimeout(() => { p.remove(); }, 5000);
+            // Randomize position
+            heart.style.left = Math.random() * 100 + "vw";
+            
+            // Randomize timing
+            const duration = (Math.random() * 3 + 3) + "s";
+            heart.style.setProperty('--duration', duration);
+            
+            // Randomize size
+            heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+            document.body.appendChild(heart);
+
+            // Remove from DOM after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
         }
+
+        // Generate love elements every 300ms
+        setInterval(createHeart, 300);
     </script>
 </body>
 </html>
