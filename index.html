@@ -8,163 +8,149 @@
     <style>
         :root {
             --primary-pink: #ff4d6d;
-            --soft-gold: #f9dcc4;
+            --deep-red: #c9184a;
+            --soft-white: #fff0f3;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #fff0f3 0%, #ffb3c1 100%);
+            background: linear-gradient(135deg, var(--soft-white) 0%, #ffb3c1 100%);
             font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
-            color: #4a4a4a;
-            text-align: center;
-        }
-
-        /* Floating Hearts Background */
-        .heart {
-            position: fixed;
-            font-size: 20px;
-            color: var(--primary-pink);
-            z-index: -1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
             user-select: none;
-            animation: float 5s linear infinite;
-            opacity: 0;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        /* Heart Pop Animation */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            font-size: 24px;
+            color: var(--primary-pink);
+            z-index: 1;
+            animation: burst 1.2s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
         }
 
-        /* Main Content */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 50px 20px;
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
+        }
+
+        /* Message Display Card */
+        .message-container {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.15);
+            max-width: 85%;
+            width: 500px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 10;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            color: var(--primary-pink);
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            color: var(--deep-red);
+            margin: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .subtitle {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-        }
-
-        .hero-image {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            border: 8px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            object-fit: cover;
-        }
-
-        .love-letter {
-            background: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.1);
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
-
-        .music-player {
-            background: white;
-            padding: 20px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn-play {
-            background: var(--primary-pink);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        footer {
-            margin-top: 50px;
+        .singer-tag {
+            margin-top: 15px;
             font-size: 0.9rem;
-            opacity: 0.7;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary-pink);
+            font-weight: 600;
+        }
+
+        .instruction {
+            position: fixed;
+            bottom: 30px;
+            color: var(--deep-red);
+            font-size: 0.9rem;
+            opacity: 0.6;
+            animation: breathe 2s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50% { transform: scale(1.05); opacity: 0.8; }
         }
     </style>
 </head>
-<body>
+<body onclick="showNextMessage(event)">
 
-    <div class="container">
-        <img src="https://via.placeholder.com/250" alt="Rasuka" class="hero-image">
-        
-        <h1>Rasuka, My Kanchee</h1>
-        <p class="subtitle">Nepal's Most Beautiful Voice</p>
-
-        <div class="love-letter">
-            <p>
-                To my dearest <strong>Kanchee</strong>,<br><br>
-                They say music is the language of the soul, but when you sing, the whole world stops to listen. 
-                Watching you grow as a singer in Nepal makes me the proudest person alive. 
-                Your voice has a magic that carries the sweetness of the hills and the purity of the mountains.
-                <br><br>
-                Never stop chasing your dreams. This little corner of the internet is a tribute to your 
-                talent, your kindness, and the love you bring into my life every day.
-            </p>
-            <h3 style="font-family: 'Dancing Script'; font-size: 2rem;">"Timro Swor ma Jadu Cha"</h3>
-        </div>
-
-        <div class="music-player">
-            <span>🎵 Our Melody</span>
-            <audio id="bgMusic" loop>
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-            </audio>
-            <button class="btn-play" onclick="toggleMusic()">Play Music</button>
-        </div>
-
-        <footer>
-            Created with ❤️ for Rasuka
-        </footer>
+    <div class="message-container">
+        <h1 id="love-text">Tap to begin, Kanchee</h1>
+        <div class="singer-tag">Rasuka • Nepal's Star</div>
     </div>
 
+    <p class="instruction">Tap anywhere for a surprise</p>
+
     <script>
-        // Heart Animation Generator
-        function createHeart() {
+        const statements = [
+            "Rasuka, your voice is pure magic. ✨",
+            "Kanchee, I am so proud of your journey!",
+            "Every high note you hit makes my heart skip.",
+            "Timro swor, mero sansar. ❤️",
+            "To the most talented singer in Nepal...",
+            "Your smile is as beautiful as your songs.",
+            "I'll always be in the front row cheering for you.",
+            "Kanchee, you are my favorite melody.",
+            "Never stop singing, the world needs your voice.",
+            "I love you more than all the stars in the sky."
+        ];
+
+        let index = 0;
+
+        function showNextMessage(e) {
+            // Change Text
+            const text = document.getElementById('love-text');
+            text.style.opacity = 0;
+            
+            setTimeout(() => {
+                text.innerText = statements[index];
+                text.style.opacity = 1;
+                index = (index + 1) % statements.length;
+            }, 300);
+
+            // Create 12 hearts per click for a "wow" effect
+            for (let i = 0; i < 12; i++) {
+                createHeart(e.clientX, e.clientY);
+            }
+        }
+
+        function createHeart(x, y) {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            
+            // Random explosion direction
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 200 + 100;
+            const tx = Math.cos(angle) * velocity + 'px';
+            const ty = Math.sin(angle) * velocity + 'px';
+            
+            heart.style.setProperty('--tx', tx);
+            heart.style.setProperty('--ty', ty);
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            
             document.body.appendChild(heart);
 
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
-        }
-
-        setInterval(createHeart, 300);
-
-        // Music Toggle
-        const music = document.getElementById('bgMusic');
-        function toggleMusic() {
-            if (music.paused) {
-                music.play();
-                document.querySelector('.btn-play').innerText = 'Pause';
-            } else {
-                music.pause();
-                document.querySelector('.btn-play').innerText = 'Play Music';
-            }
+            // Remove heart after animation
+            setTimeout(() => heart.remove(), 1200);
         }
     </script>
 </body>
