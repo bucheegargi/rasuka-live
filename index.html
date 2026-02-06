@@ -3,204 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rasuka | Official Tribute</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Rasuka | The Voice of My Heart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+Devanagari:wght@300;600&family=Prata&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent: #E2B07E; /* Sophisticated Gold */
-            --bg-dark: #0f0f0f;
-            --glass: rgba(255, 255, 255, 0.03);
+            --royal-crimson: #6b0f1a;
+            --gold: #d4af37;
+            --deep-space: #0a0a0a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: crosshair; }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Professional "Single Screen" feel */
-        }
-
-        /* Animated Stardust Background */
-        canvas {
-            position: fixed;
-            top: 0; left: 0;
-            z-index: 1;
-        }
-
-        /* Cinematic Overlay */
-        .overlay {
-            position: relative;
-            z-index: 10;
+            background-color: var(--deep-space);
+            color: white;
+            font-family: 'Prata', serif;
             height: 100vh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at center, rgba(226, 176, 126, 0.05) 0%, transparent 70%);
+            background: radial-gradient(circle at center, #2b060a 0%, #0a0a0a 100%);
         }
 
-        .content-box {
+        /* Continuous Background Heart Stream */
+        #bg-stream {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Glassmorphism Main Stage */
+        .stage {
+            position: relative;
+            z-index: 10;
+            padding: 80px 40px;
             text-align: center;
-            max-width: 800px;
-            padding: 60px;
-            border-radius: 4px; /* Professional sharp edges */
-            border-left: 1px solid rgba(226, 176, 126, 0.3);
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            animation: fadeIn 2.5s ease-out;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            max-width: 550px;
+            width: 90%;
+            border-radius: 4px;
         }
 
-        .subtitle {
-            font-size: 0.75rem;
-            letter-spacing: 0.5rem;
+        .gold-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 25px auto;
+        }
+
+        .sub-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 5px;
+            font-size: 0.7rem;
+            color: var(--gold);
             text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-            font-weight: 600;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
+            font-size: clamp(3rem, 10vw, 5rem);
             font-weight: 400;
-            line-height: 1;
-            margin-bottom: 30px;
-            font-style: italic;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #ffffff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .divider {
-            width: 40px;
-            height: 1px;
-            background: var(--accent);
-            margin: 20px auto;
-        }
-
-        .nepali-script {
-            font-family: 'Inter', sans-serif;
-            font-size: 1.2rem;
+        .nepali-name {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-top: 10px;
             font-weight: 300;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 40px;
         }
 
-        /* Professional Control Button */
-        .cta-button {
+        .quote {
+            font-size: 1rem;
+            color: #aaa;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .play-trigger {
+            margin-top: 40px;
             background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 12px 40px;
-            font-size: 0.8rem;
-            letter-spacing: 0.2rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 35px;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
+            transition: 0.4s;
         }
 
-        .cta-button:hover {
-            background: var(--accent);
-            color: var(--bg-dark);
-            box-shadow: 0 0 30px rgba(226, 176, 126, 0.4);
+        .play-trigger:hover {
+            background: var(--gold);
+            color: black;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Floating Love Elements (Subtle) */
-        .float-note {
+        /* Click Particles & Background Elements */
+        .particle {
             position: absolute;
-            color: var(--accent);
-            opacity: 0.2;
             pointer-events: none;
-            font-size: 1.5rem;
+            z-index: 99;
+            animation: burst 1.5s ease-out forwards;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        .drifting-heart {
+            position: absolute;
+            bottom: -50px;
+            opacity: 0;
+            animation: driftUp 10s linear infinite;
+        }
+
+        @keyframes driftUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
-<body>
+<body onclick="spawnBurst(event)">
 
-    <canvas id="stardust"></canvas>
+    <div id="bg-stream"></div>
 
-    <div class="overlay">
-        <div class="content-box">
-            <p class="subtitle">A Tribute to Musical Excellence</p>
-            <h1>Rasuka</h1>
-            <div class="divider"></div>
-            <p class="nepali-script">म तिम्रो आवाजमा हराउँछु, कान्छी</p>
-            <p style="font-weight: 300; letter-spacing: 1px; color: #888; margin-bottom: 40px;">
-                Honoring the passion, the voice, and the soul of a <br>
-                true Nepali artist.
-            </p>
-            <button class="cta-button" onclick="toggleAudio()">Enter Experience</button>
-        </div>
+    <div class="stage">
+        <span class="sub-title">A Living Tribute to</span>
+        <h1>Rasuka</h1>
+        <div class="nepali-name">कान्छी</div>
+        <div class="gold-line"></div>
+        <p class="quote">
+            "Your voice is the bridge between the earth and the heavens. <br>
+            A soul that sings, a heart that loves."
+        </p>
+        <button class="play-trigger" onclick="toggleMusic()">Experience Music</button>
     </div>
 
-    <audio id="player" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    <audio id="nepaliInstrumental" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // Stardust Particles Logic
-        const canvas = document.getElementById('stardust');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        const audio = document.getElementById('nepaliInstrumental');
+        const container = document.getElementById('bg-stream');
+        const clickIcons = ['❤️', '🎶', '✨', '🎵', '🌸'];
+        const driftIcons = ['❤️', '💖', '✨'];
 
-        function initCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+        // 1. Background Heart Stream (Automatic)
+        function createDrift() {
+            const el = document.createElement('div');
+            el.className = 'drifting-heart';
+            el.innerText = driftIcons[Math.floor(Math.random() * driftIcons.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = Math.random() * 15 + 10 + 'px';
+            el.style.animationDuration = Math.random() * 5 + 5 + 's';
+            container.appendChild(el);
+            setTimeout(() => el.remove(), 10000);
+        }
+        setInterval(createDrift, 600);
+
+        // 2. Multi-Click Burst Effect
+        function spawnBurst(e) {
+            for (let i = 0; i < 8; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.innerText = clickIcons[Math.floor(Math.random() * clickIcons.length)];
+                p.style.left = e.clientX + 'px';
+                p.style.top = e.clientY + 'px';
+                
+                // Random explosion direction
+                const tx = (Math.random() - 0.5) * 300 + 'px';
+                const ty = (Math.random() - 0.5) * 300 + 'px';
+                p.style.setProperty('--tx', tx);
+                p.style.setProperty('--ty', ty);
+                
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 1500);
+            }
         }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedY = Math.random() * 0.5 + 0.2;
-                this.opacity = Math.random();
-            }
-            update() {
-                this.y -= this.speedY;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(226, 176, 126, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        function handleParticles() {
-            for (let i = 0; i < 100; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
-        handleParticles();
-        animate();
-
-        function toggleAudio() {
-            const p = document.getElementById('player');
-            const btn = document.querySelector('.cta-button');
-            if(p.paused) {
-                p.play();
-                btn.innerText = "Listening...";
+        // 3. Audio Controller
+        function toggleMusic() {
+            const btn = document.querySelector('.play-trigger');
+            if (audio.paused) {
+                audio.play();
+                btn.innerText = "Listening to Tradition";
             } else {
-                p.pause();
-                btn.innerText = "Enter Experience";
+                audio.pause();
+                btn.innerText = "Experience Music";
             }
         }
     </script>
