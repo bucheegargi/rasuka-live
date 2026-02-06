@@ -3,160 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribute to Kanchiiii</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <title>Rasuka | Official Tribute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --love-red: #ff4d6d;
-            --gold: #ffd700;
-            --soft-pink: #ffafcc;
+            --accent: #E2B07E; /* Sophisticated Gold */
+            --bg-dark: #0f0f0f;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
-        body, html {
-            margin: 0; padding: 0; height: 100%;
-            background: #0f0c29; /* Deep midnight blue */
-            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
-            font-family: 'Montserrat', sans-serif;
-            overflow: hidden;
-            color: white;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* Professional "Single Screen" feel */
         }
 
-        /* The Main Content */
-        .glass-stage {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%;
-            max-width: 450px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 20px;
+        /* Animated Stardust Background */
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            z-index: 1;
+        }
+
+        /* Cinematic Overlay */
+        .overlay {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at center, rgba(226, 176, 126, 0.05) 0%, transparent 70%);
+        }
+
+        .content-box {
             text-align: center;
-            z-index: 100;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            max-width: 800px;
+            padding: 60px;
+            border-radius: 4px; /* Professional sharp edges */
+            border-left: 1px solid rgba(226, 176, 126, 0.3);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            animation: fadeIn 2.5s ease-out;
+        }
+
+        .subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
-            margin: 0;
-            color: var(--love-red);
-            text-shadow: 0 0 15px rgba(255, 77, 109, 0.8);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: 30px;
+            font-style: italic;
         }
 
-        .nepali-title {
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        /* Floating Love Elements */
-        .heart-pop {
-            position: absolute;
-            bottom: -50px;
-            pointer-events: none;
-            user-select: none;
-            animation: floatUp var(--duration) ease-in infinite;
-            opacity: 0;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(-110vh) scale(1.5) rotate(360deg); opacity: 0; }
-        }
-
-        .music-bar {
-            width: 100px;
-            height: 30px;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
             margin: 20px auto;
         }
 
-        .bar {
-            width: 5px;
-            background: var(--love-red);
-            animation: bounce 0.5s infinite alternate;
+        .nepali-script {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 40px;
         }
 
-        @keyframes bounce {
-            from { height: 5px; }
-            to { height: 30px; }
-        }
-
-        .play-hint {
-            font-size: 0.7rem;
+        /* Professional Control Button */
+        .cta-button {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 12px 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.2rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 30px;
-            color: var(--soft-pink);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
+        .cta-button:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(226, 176, 126, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Floating Love Elements (Subtle) */
+        .float-note {
+            position: absolute;
+            color: var(--accent);
+            opacity: 0.2;
+            pointer-events: none;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
-    <div class="glass-stage">
-        <p class="nepali-title">Mero Sannani</p>
-        <h1>Rasuka</h1>
-        <p style="margin: 20px 0; font-style: italic; opacity: 0.8;">
-            "Whenever you sing, my world stops to listen. Keep making magic with your voice, Kanchiiii."
-        </p>
-        
-        <div class="music-bar">
-            <div class="bar" style="animation-delay: 0.1s"></div>
-            <div class="bar" style="animation-delay: 0.3s"></div>
-            <div class="bar" style="animation-delay: 0.2s"></div>
-            <div class="bar" style="animation-delay: 0.4s"></div>
-            <div class="bar" style="animation-delay: 0.5s"></div>
+    <canvas id="stardust"></canvas>
+
+    <div class="overlay">
+        <div class="content-box">
+            <p class="subtitle">A Tribute to Musical Excellence</p>
+            <h1>Rasuka</h1>
+            <div class="divider"></div>
+            <p class="nepali-script">म तिम्रो आवाजमा हराउँछु, कान्छी</p>
+            <p style="font-weight: 300; letter-spacing: 1px; color: #888; margin-bottom: 40px;">
+                Honoring the passion, the voice, and the soul of a <br>
+                true Nepali artist.
+            </p>
+            <button class="cta-button" onclick="toggleAudio()">Enter Experience</button>
         </div>
-
-        <p class="play-hint">Tap anywhere to play our song</p>
     </div>
 
-    <audio id="loveSong" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    <audio id="player" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        function playMusic() {
-            document.getElementById('loveSong').play();
-            document.querySelector('.play-hint').innerHTML = "Listening with you... ❤️";
+        // Stardust Particles Logic
+        const canvas = document.getElementById('stardust');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
 
-        function createHeart() {
-            const icons = ['❤️', '💖', '🎶', '✨', '🌸', '🎤'];
-            const heart = document.createElement('div');
-            heart.className = 'heart-pop';
-            
-            // Randomize icon
-            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
-            
-            // Randomize position
-            heart.style.left = Math.random() * 100 + "vw";
-            
-            // Randomize timing
-            const duration = (Math.random() * 3 + 3) + "s";
-            heart.style.setProperty('--duration', duration);
-            
-            // Randomize size
-            heart.style.fontSize = (Math.random() * 20 + 15) + "px";
-
-            document.body.appendChild(heart);
-
-            // Remove from DOM after animation
-            setTimeout(() => {
-                heart.remove();
-            }, 6000);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedY = Math.random() * 0.5 + 0.2;
+                this.opacity = Math.random();
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(226, 176, 126, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        // Generate love elements every 300ms
-        setInterval(createHeart, 300);
+        function handleParticles() {
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        handleParticles();
+        animate();
+
+        function toggleAudio() {
+            const p = document.getElementById('player');
+            const btn = document.querySelector('.cta-button');
+            if(p.paused) {
+                p.play();
+                btn.innerText = "Listening...";
+            } else {
+                p.pause();
+                btn.innerText = "Enter Experience";
+            }
+        }
     </script>
 </body>
 </html>
